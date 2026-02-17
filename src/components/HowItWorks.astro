@@ -1,0 +1,58 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Бесплатная консультация',
+    description: '15-минутный звонок, чтобы познакомиться, обсудить ваш запрос и понять, подходит ли вам мой подход.',
+  },
+  {
+    number: '02',
+    title: 'Составление плана',
+    description: 'На первых сессиях мы определим цели терапии и составим индивидуальный план работы.',
+  },
+  {
+    number: '03',
+    title: 'Регулярные сессии',
+    description: 'Еженедельные онлайн-встречи по 50 минут с домашними заданиями для закрепления навыков.',
+  },
+];
+---
+
+<section class="py-12 sm:py-24 px-4 bg-warm-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="reveal font-heading text-3xl sm:text-4xl font-semibold text-warm-gray mb-3 text-center">
+      Три шага к терапии
+    </h2>
+    <div class="reveal reveal-delay-1 w-12 h-0.5 bg-sage/40 mx-auto mb-10 sm:mb-14"></div>
+
+    <!-- Mobile: vertical compact list -->
+    <div class="reveal sm:hidden space-y-4">
+      {steps.map(({ number, title, description }) => (
+        <div class="flex gap-3">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-sage/15 flex items-center justify-center text-sage-dark font-heading text-sm font-semibold transition-colors duration-200 hover:bg-sage/25">
+            {number}
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-warm-gray mb-1">{title}</h3>
+            <p class="text-warm-gray-light text-sm leading-relaxed">{description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Desktop: horizontal with connecting line -->
+    <div class="reveal hidden sm:grid sm:grid-cols-3 gap-6 relative">
+      <div class="absolute top-7 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-sage/25" aria-hidden="true"></div>
+
+      {steps.map(({ number, title, description }) => (
+        <div class="text-center relative">
+          <div class="relative z-10 inline-flex items-center justify-center w-14 h-14 rounded-full bg-sage/15 text-sage-dark font-heading text-lg font-semibold mb-6 ring-4 ring-warm-white transition-colors duration-200 hover:bg-sage/25">
+            {number}
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-warm-gray mb-3">{title}</h3>
+          <p class="text-warm-gray-light leading-relaxed text-[0.95rem] max-w-xs mx-auto">{description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

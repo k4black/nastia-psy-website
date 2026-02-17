@@ -1,0 +1,85 @@
+---
+const cards = [
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>`,
+    title: 'Индивидуальный подход',
+    description: 'Терапия строится вокруг ваших уникальных потребностей, целей и жизненной ситуации.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+    title: 'Доказательные методы',
+    description: 'КПТ — один из наиболее исследованных методов психотерапии с подтверждённой эффективностью.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+    title: 'Безопасное пространство',
+    description: 'Конфиденциальность, принятие и отсутствие осуждения — основа нашей работы.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+    title: 'Совместная работа',
+    description: 'Вы — активный участник процесса. Мы вместе ставим цели и отслеживаем прогресс.',
+  },
+];
+
+const reasons = [
+  'Тревожность и панические атаки',
+  'Депрессия и апатия',
+  'Эмоциональное выгорание',
+  'Проблемы в отношениях',
+  'Низкая самооценка',
+  'Жизненные кризисы и перемены',
+];
+---
+
+<section id="approach" class="py-12 sm:py-24 px-4 bg-warm-beige">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal flex items-center gap-4 mb-4 sm:mb-5">
+      <div class="w-1 h-8 bg-sage rounded-full shrink-0"></div>
+      <h2 class="font-heading text-3xl sm:text-4xl font-semibold text-warm-gray">
+        Как я работаю
+      </h2>
+    </div>
+    <p class="reveal reveal-delay-1 text-warm-gray-light max-w-2xl mb-10 sm:mb-14 leading-relaxed text-sm sm:text-base">
+      В основе моей практики — когнитивно-поведенческая терапия, которая помогает изменить паттерны мышления и поведения, влияющие на ваше самочувствие.
+    </p>
+
+    <!-- Cards: compact on mobile (no descriptions), full on desktop -->
+    <div class="reveal grid grid-cols-2 gap-3 sm:gap-5 mb-10 sm:mb-20">
+      {cards.map(({ icon, title, description }) => (
+        <div class="group bg-warm-white rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-sage/15 transition-all duration-300 hover:shadow-lg hover:shadow-sage/10 hover:scale-[1.02]">
+          <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-sage/10 flex items-center justify-center text-sage-dark mb-2 sm:mb-5 transition-colors group-hover:bg-sage/20 [&>svg]:w-5 [&>svg]:h-5 sm:[&>svg]:w-6 sm:[&>svg]:h-6" set:html={icon} />
+          <h3 class="font-heading text-sm sm:text-xl font-semibold text-warm-gray sm:mb-3">{title}</h3>
+          <p class="hidden sm:block text-warm-gray-light leading-relaxed text-[0.95rem]">{description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="reveal flex items-center gap-4 mb-6 sm:mb-10">
+      <div class="w-1 h-8 bg-sage rounded-full shrink-0"></div>
+      <h3 class="font-heading text-2xl sm:text-3xl font-semibold text-warm-gray">
+        С чем я работаю
+      </h3>
+    </div>
+
+    <!-- Mobile: compact bullet list -->
+    <ul class="sm:hidden space-y-2.5 max-w-sm mx-auto">
+      {reasons.map((text) => (
+        <li class="flex items-center gap-3 text-warm-gray text-[0.95rem]">
+          <div class="w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
+          {text}
+        </li>
+      ))}
+    </ul>
+
+    <!-- Desktop: card grid -->
+    <div class="reveal hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {reasons.map((text) => (
+        <div class="flex items-center gap-4 bg-warm-white rounded-xl px-6 py-5 border border-sage/15 transition-all duration-200 hover:border-sage/30">
+          <div class="w-2 h-2 rounded-full bg-sage shrink-0" />
+          <span class="text-warm-gray font-medium text-[0.95rem]">{text}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

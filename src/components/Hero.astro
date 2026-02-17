@@ -1,0 +1,76 @@
+---
+import { loadContent } from '../utils/content';
+const { frontmatter } = loadContent('hero.md');
+
+interface Props {
+  scheduleUrl?: string;
+}
+
+const { scheduleUrl } = Astro.props;
+const bookingHref = scheduleUrl ?? '#booking';
+const bookingAttrs = scheduleUrl
+  ? { target: '_blank', rel: 'noopener noreferrer' }
+  : {};
+
+function withBase(assetPath: string) {
+  const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  const clean = assetPath.startsWith('/') ? assetPath.slice(1) : assetPath;
+  return `${base}${clean}`;
+}
+
+const heroImageSrc = withBase(frontmatter.image as string);
+---
+
+<section class="min-h-[50vh] sm:min-h-[70vh] flex items-center pt-20 pb-8 sm:pt-24 sm:pb-12 px-4 bg-warm-beige relative">
+  <!-- Subtle decorative dots -->
+  <div class="absolute top-20 left-8 w-32 h-32 opacity-[0.04] hidden sm:block" style="background-image: radial-gradient(circle, var(--color-warm-gray) 1.5px, transparent 1.5px); background-size: 16px 16px;" aria-hidden="true"></div>
+  <div class="absolute bottom-16 right-8 w-40 h-40 opacity-[0.04] hidden sm:block" style="background-image: radial-gradient(circle, var(--color-warm-gray) 1.5px, transparent 1.5px); background-size: 16px 16px;" aria-hidden="true"></div>
+
+  <div class="max-w-5xl mx-auto w-full grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
+    <div class="order-2 md:order-1 text-center md:text-left">
+      <p class="reveal text-sage-dark text-sm font-medium tracking-[0.2em] uppercase mb-4 sm:mb-5">
+        {frontmatter.title}
+      </p>
+      <h1 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl md:text-[3.5rem] lg:text-6xl font-semibold text-warm-gray mb-4 sm:mb-6 leading-[1.15]">
+        {frontmatter.name}
+      </h1>
+      <p class="reveal reveal-delay-2 text-warm-gray-light text-base sm:text-xl max-w-lg mb-8 sm:mb-10 leading-relaxed">
+        {frontmatter.tagline}
+      </p>
+      <div class="reveal reveal-delay-3 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+        <a
+          href={bookingHref}
+          {...bookingAttrs}
+          class="inline-flex items-center justify-center gap-2 bg-sage hover:bg-sage-dark text-white px-7 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-sage/25 hover:-translate-y-0.5"
+        >
+          Записаться
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="order-1 md:order-2 flex justify-center reveal">
+      <div class="relative">
+        <!-- Organic accent shape behind photo -->
+        <div class="absolute -inset-4 bg-sage/10 rounded-[2rem] rotate-3 scale-[1.02]" aria-hidden="true"></div>
+        <img
+          src={heroImageSrc}
+          alt={frontmatter.name}
+          class="relative w-40 h-52 sm:w-72 sm:h-90 md:w-80 md:h-[26rem] object-cover rounded-2xl shadow-xl"
+          loading="eager"
+        />
+        <!-- Small floating accent card -->
+        <div class="absolute -bottom-3 -left-4 sm:-bottom-4 sm:-left-6 bg-warm-white rounded-xl shadow-lg px-4 py-2.5 sm:px-5 sm:py-3 border border-sage/10">
+          <p class="text-sage-dark font-medium text-xs sm:text-sm">10+ лет практики</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-warm-gray-light/50">
+    <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7" />
+    </svg>
+  </div>
+</section>

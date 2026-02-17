@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sage: #AEB697;
+  --color-sage-light: #C8CDAE;
+  --color-sage-dark: #8A9270;
+  --color-warm-white: #FAF9F6;
+  --color-warm-gray: #3D3D3D;
+  --color-warm-gray-light: #6B6B6B;
+  --color-warm-beige: #F0EDE6;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+.dark {
+  --color-warm-white: #1a1a1a;
+  --color-warm-beige: #242424;
+  --color-warm-gray: #e8e6e1;
+  --color-warm-gray-light: #a8a5a0;
+  --color-sage: #AEB697;
+  --color-sage-light: #C8CDAE;
+  --color-sage-dark: #c5cba8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-warm-gray);
+  background-color: var(--color-warm-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+section {
+  overflow: hidden;
+}

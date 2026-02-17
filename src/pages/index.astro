@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Approach from '../components/Approach.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Services from '../components/Services.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { loadContent } from '../utils/content';
+
+const { frontmatter: contactFrontmatter } = loadContent('contact.md');
+const scheduleUrl = contactFrontmatter.scheduleUrl as string | undefined;
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero scheduleUrl={scheduleUrl} />
+    <About />
+    <Approach />
+    <HowItWorks />
+    <Services scheduleUrl={scheduleUrl} />
+    <Contact scheduleUrl={scheduleUrl} />
+  </main>
+  <Footer />
+</Layout>
