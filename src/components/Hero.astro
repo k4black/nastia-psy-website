@@ -21,14 +21,10 @@ function withBase(assetPath: string) {
 const heroImageSrc = withBase(frontmatter.image as string);
 ---
 
-<section class="min-h-[50vh] sm:min-h-[70vh] flex items-center pt-20 pb-8 sm:pt-24 sm:pb-12 px-4 bg-warm-beige relative">
-  <!-- Subtle decorative dots -->
-  <div class="absolute top-20 left-8 w-32 h-32 opacity-[0.04] hidden sm:block" style="background-image: radial-gradient(circle, var(--color-warm-gray) 1.5px, transparent 1.5px); background-size: 16px 16px;" aria-hidden="true"></div>
-  <div class="absolute bottom-16 right-8 w-40 h-40 opacity-[0.04] hidden sm:block" style="background-image: radial-gradient(circle, var(--color-warm-gray) 1.5px, transparent 1.5px); background-size: 16px 16px;" aria-hidden="true"></div>
-
+<section class="min-h-[50vh] sm:min-h-[70vh] flex items-center pt-20 pb-8 sm:pt-24 sm:pb-12 px-4 bg-warm-beige relative overflow-hidden">
   <div class="max-w-5xl mx-auto w-full grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
     <div class="order-2 md:order-1 text-center md:text-left">
-      <p class="reveal text-sage-dark text-sm font-medium tracking-[0.2em] uppercase mb-4 sm:mb-5">
+      <p class="reveal text-sage-darker dark:text-sage-light text-sm font-medium tracking-[0.2em] uppercase mb-4 sm:mb-5">
         {frontmatter.title}
       </p>
       <h1 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl md:text-[3.5rem] lg:text-6xl font-semibold text-warm-gray mb-4 sm:mb-6 leading-[1.15]">
@@ -59,9 +55,17 @@ const heroImageSrc = withBase(frontmatter.image as string);
           class="relative w-40 h-52 sm:w-72 sm:h-90 md:w-80 md:h-[26rem] object-cover rounded-2xl shadow-xl"
           loading="eager"
         />
+
+        <!-- Floating decorative SVGs around photo - sage colored, visible in light mode -->
+        <img src={withBase('star-hand-drawn-symbol-outline.svg')} alt="" class="absolute -top-8 -left-8 sm:-top-12 sm:-left-12 w-7 sm:w-10 opacity-40 animate-float-slow [filter:invert(68%)_sepia(12%)_saturate(446%)_hue-rotate(45deg)_brightness(94%)_contrast(87%)]" aria-hidden="true" style="animation-delay: 0s;" />
+        <img src={withBase('star-outline-with-black-smaller-star-inside.svg')} alt="" class="absolute -top-6 -right-10 sm:-top-8 sm:-right-14 w-6 sm:w-9 opacity-35 animate-float-medium [filter:invert(68%)_sepia(12%)_saturate(446%)_hue-rotate(45deg)_brightness(94%)_contrast(87%)] -rotate-12" aria-hidden="true" style="animation-delay: 1s;" />
+        <img src={withBase('star-hand-drawn-symbol-outline.svg')} alt="" class="absolute top-[40%] -left-10 sm:-left-14 w-6 sm:w-9 opacity-40 animate-float-medium [filter:invert(68%)_sepia(12%)_saturate(446%)_hue-rotate(45deg)_brightness(94%)_contrast(87%)] -rotate-15" aria-hidden="true" style="animation-delay: 2s;" />
+        <img src={withBase('checkmark-hand-drawn-outline.svg')} alt="" class="absolute top-[60%] -right-10 sm:-right-14 w-8 sm:w-11 opacity-45 animate-float-slow [filter:invert(68%)_sepia(12%)_saturate(446%)_hue-rotate(45deg)_brightness(94%)_contrast(87%)] rotate-20" aria-hidden="true" style="animation-delay: 1.5s;" />
+        <img src={withBase('star-outline-with-black-smaller-star-inside.svg')} alt="" class="absolute bottom-[20%] -left-12 sm:-left-16 w-7 sm:w-10 opacity-35 animate-float-medium [filter:invert(68%)_sepia(12%)_saturate(446%)_hue-rotate(45deg)_brightness(94%)_contrast(87%)] rotate-8" aria-hidden="true" style="animation-delay: 2.5s;" />
+
         <!-- Small floating accent card -->
-        <div class="absolute -bottom-3 -left-4 sm:-bottom-4 sm:-left-6 bg-warm-white rounded-xl shadow-lg px-4 py-2.5 sm:px-5 sm:py-3 border border-sage/10">
-          <p class="text-sage-dark font-medium text-xs sm:text-sm">10+ лет практики</p>
+        <div class="absolute -bottom-3 -left-4 sm:-bottom-4 sm:-left-6 bg-warm-white dark:bg-warm-beige rounded-xl shadow-lg px-4 py-2.5 sm:px-5 sm:py-3 border border-sage/10">
+          <p class="text-sage-darker dark:text-sage-light font-medium text-xs sm:text-sm">{frontmatter.badge}</p>
         </div>
       </div>
     </div>
