@@ -52,6 +52,19 @@ Service pricing is configured as parameters in `src/components/Services.astro` (
 | `npm run build`   | Build production site to `./dist/`           |
 | `npm run preview` | Preview production build locally             |
 
+## Deployment
+
+Pushing to `main` triggers a GitHub Actions workflow (`.github/workflows/deploy.yml`) that deploys to both **GitHub Pages** and **Cloudflare Pages** ([bystrova.pages.dev](https://bystrova.pages.dev)) in parallel.
+
+### Required GitHub Secrets for Cloudflare
+
+| Secret                   | Value                        |
+| :----------------------- | :--------------------------- |
+| `CLOUDFLARE_ACCOUNT_ID`  | Your Cloudflare account ID   |
+| `CLOUDFLARE_API_TOKEN`   | Your Cloudflare API token    |
+
+Add these in **Settings > Secrets > Actions > New repository secret**.
+
 ## Features
 
 - Light/dark mode with system preference detection
