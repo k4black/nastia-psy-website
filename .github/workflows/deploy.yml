@@ -47,7 +47,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx astro build
+        run: npm run build
         env:
           CF_PAGES: "1"
 
