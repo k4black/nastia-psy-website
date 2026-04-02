@@ -1,0 +1,69 @@
+# Default: allow all search engines and web crawlers
+User-agent: *
+Allow: /
+
+# ──────────────────────────────────────────────────────────────
+# AI search agents and browsing assistants — explicitly allowed
+# These are used for answering user queries, not training models
+# ──────────────────────────────────────────────────────────────
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ──────────────────────────────────────────────────────────────
+# LLM training crawlers — disallowed
+# These bots harvest content specifically to train AI models
+# ──────────────────────────────────────────────────────────────
+
+# OpenAI training crawler (distinct from ChatGPT-User browsing)
+User-agent: GPTBot
+Disallow: /
+
+# Common Crawl — primary source for LLM training datasets
+User-agent: CCBot
+Disallow: /
+
+# Anthropic training crawler (distinct from ClaudeBot browsing)
+User-agent: anthropic-ai
+Disallow: /
+
+# Google Gemini/Bard training data
+User-agent: Google-Extended
+Disallow: /
+
+# Apple Intelligence training
+User-agent: Applebot-Extended
+Disallow: /
+
+# ByteDance/TikTok AI training
+User-agent: Bytespider
+Disallow: /
+
+# Meta AI training
+User-agent: FacebookBot
+Disallow: /
+
+# Diffbot — AI data extraction service
+User-agent: Diffbot
+Disallow: /
+
+# Omgili/Webz.io — content harvesting
+User-agent: Omgili
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+Sitemap: https://k4black.github.io/nastia-psy-website/sitemap-index.xml

@@ -1,0 +1,92 @@
+---
+import { loadContent } from '../utils/content';
+
+const { frontmatter } = loadContent('faq.md');
+const { frontmatter: contact } = loadContent('contact.md');
+
+const title = frontmatter.title as string;
+const items = frontmatter.items as Array<{
+  question: string;
+  answer: string;
+  ctaType?: 'booking' | 'telegram';
+}>;
+
+const scheduleUrl = contact.scheduleUrl as string;
+const telegramUrl = contact.telegramUrl as string;
+
+const ctaConfig = {
+  booking: { label: 'Записаться на бесплатную встречу', href: scheduleUrl, external: true },
+  telegram: { label: 'Написать в Telegram', href: telegramUrl, external: true },
+};
+
+// FAQPage JSON-LD schema — read directly by Google and AI crawlers
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: answer,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section id="faq" class="py-12 sm:py-20 px-4 bg-warm-beige">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="reveal flex items-center gap-4 mb-8 sm:mb-10">
+      <div class="w-1 h-8 bg-sage rounded-full shrink-0"></div>
+      <h2 class="font-heading text-3xl sm:text-4xl font-semibold text-warm-gray">
+        {title}
+      </h2>
+    </div>
+
+    <div class="reveal space-y-2">
+      {items.map(({ question, answer, ctaType }) => {
+        const cta = ctaType ? ctaConfig[ctaType] : null;
+        return (
+          <details class="group border border-sage/15 rounded-xl overflow-hidden bg-warm-white hover:border-sage/30 transition-colors duration-200">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none select-none">
+              <span class="text-warm-gray font-medium text-sm leading-snug pr-2">
+                {question}
+              </span>
+              <svg
+                class="w-4 h-4 text-sage shrink-0 transition-transform duration-200 group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5">
+              <p class="text-warm-gray-light text-sm leading-relaxed border-t border-sage/10 pt-3 mb-0">
+                {answer}
+              </p>
+              {cta && (
+                <a
+                  href={cta.href}
+                  target={cta.external ? '_blank' : undefined}
+                  rel={cta.external ? 'noopener noreferrer' : undefined}
+                  class="inline-flex items-center gap-2 mt-4 text-sage-light hover:text-sage text-xs font-medium transition-colors duration-200 group/link"
+                >
+                  {cta.label}
+                  <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </details>
+        );
+      })}
+    </div>
+
+  </div>
+</section>

@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { loadContent } from '../utils/content';
+import portraitImage from '../../public/portrait-1.jpg';
+
 const { frontmatter } = loadContent('hero.md');
 
 interface Props {
@@ -17,8 +20,6 @@ function withBase(assetPath: string) {
   const clean = assetPath.startsWith('/') ? assetPath.slice(1) : assetPath;
   return `${base}${clean}`;
 }
-
-const heroImageSrc = withBase(frontmatter.image as string);
 ---
 
 <section class="min-h-[50vh] sm:min-h-[70vh] flex items-center pt-20 pb-8 sm:pt-24 sm:pb-12 px-4 bg-warm-beige relative overflow-hidden">
@@ -49,9 +50,12 @@ const heroImageSrc = withBase(frontmatter.image as string);
       <div class="relative">
         <!-- Organic accent shape behind photo -->
         <div class="absolute -inset-4 bg-sage/10 rounded-[2rem] rotate-3 scale-[1.02]" aria-hidden="true"></div>
-        <img
-          src={heroImageSrc}
-          alt={frontmatter.name}
+        <Image
+          src={portraitImage}
+          alt={frontmatter.name as string}
+          width={320}
+          height={416}
+          quality={90}
           class="relative w-40 h-52 sm:w-72 sm:h-90 md:w-80 md:h-[26rem] object-cover rounded-2xl shadow-xl"
           loading="eager"
         />

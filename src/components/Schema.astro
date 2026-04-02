@@ -1,0 +1,85 @@
+---
+import { loadContent } from '../utils/content';
+
+// Load content from markdown files
+const siteContent = loadContent('site.md');
+const aboutContent = loadContent('about.md');
+const servicesContent = loadContent('services.md');
+const contactContent = loadContent('contact.md');
+
+// Build base URL
+const site = import.meta.env.SITE || 'https://k4black.github.io';
+const base = import.meta.env.BASE_URL || '/nastia-psy-website';
+const baseUrl = `${site}${base}`;
+
+// Extract structured data from content
+const siteName = siteContent.frontmatter.siteTitle as string;
+const siteDescription = siteContent.frontmatter.siteDescription as string;
+const brandName = siteContent.frontmatter.brandName as string;
+
+// Parse services price (extract numeric value)
+const priceText = servicesContent.frontmatter.price as string;
+const priceMatch = priceText.match(/(\d[\d\s]*)/);
+const price = priceMatch ? priceMatch[1].replace(/\s/g, '') : '3500';
+
+// Social media links
+const telegramUrl = contactContent.frontmatter.telegramUrl as string;
+const instagramUrl = contactContent.frontmatter.instagramUrl as string;
+
+// Build JSON-LD structured data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: siteName,
+  description: siteDescription,
+  url: baseUrl,
+  serviceType: 'Психотерапия',
+  areaServed: {
+    '@type': 'Place',
+    name: 'Весь мир'
+  },
+  provider: {
+    '@type': 'Person',
+    name: brandName,
+    jobTitle: aboutContent.frontmatter.subtitle as string,
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'МГУ им. М.В. Ломоносова'
+    },
+    knowsAbout: [
+      'Когнитивно-поведенческая терапия',
+      'КПТ',
+      'Тревожные расстройства',
+      'Депрессия',
+      'ПТСР'
+    ],
+    sameAs: [
+      telegramUrl,
+      instagramUrl
+    ]
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Психотерапевтические услуги',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: servicesContent.frontmatter.subtitle as string,
+          description: servicesContent.frontmatter.summary as string,
+          provider: {
+            '@type': 'Person',
+            name: brandName
+          }
+        },
+        price: price,
+        priceCurrency: 'RUB',
+        availability: 'https://schema.org/InStock'
+      }
+    ]
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
