@@ -50,3 +50,6 @@ coverage/
 
 # Local tooling
 .vscode-test/
+
+# Generated assets
+public/og-image.jpg

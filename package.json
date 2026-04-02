@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "generate-og": "node scripts/generate-og-image.mjs",
+    "prebuild": "node scripts/generate-og-image.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -18,6 +18,6 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "canvas": "^3.2.1"
+    "@napi-rs/canvas": "^0.1.97"
   }
 }
